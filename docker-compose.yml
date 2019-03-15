@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-app
+    ports:
+      - "3000:3000"
+    environment:
+      UPSTREAM_SERVICE: "http://stub:8000"
+    depends_on:
+      - stub
+  stub:
+    image: palo/swagger-api-mock:latest
+    volumes:
+      - $PWD/stub/stub-openapi.yml:/data/swagger.yaml
+    ports:
+     - "8000:8000"
+  test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-tests
+    environment:
+      TEST_ENDPOINT: "http://app:3000"
+    depends_on:
+      - app

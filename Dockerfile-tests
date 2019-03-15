@@ -1,7 +1,5 @@
 # Note: not best practices!
 FROM node:10-alpine
-WORKDIR /test
 COPY ./tests .
 RUN npm install
-USER nobody
-CMD ["npm", "test"]
+ENTRYPOINT ["npm", "test"]
