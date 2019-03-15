@@ -1,0 +1,18 @@
+swagger: '2.0'
+
+info:
+  version: "0.0.1"
+  title: Very Secure User Service
+
+paths:
+  /user/{userId}:
+    get:
+      description: |
+        Gets a user (but not really) by userId
+      produces:
+        - text/plain
+      responses:
+        200:
+          description: Returns the user's name
+          schema:
+            type: string
